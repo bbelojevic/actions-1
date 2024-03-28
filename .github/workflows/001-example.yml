@@ -3,17 +3,17 @@ name: My 001 workflow
 on: push
 
 jobs:
-    first_job:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+  first_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-            - name: First step
-              run: |
-                echo "My 001 GH action job"
-                ls -al
-                cat README.md
+      - name: First step
+        run: |
+          echo "My 001 GH action job"
+          ls -al
+          cat README.md
 
-            - name: ASCII artwork
-              run: cowsay -f dragon "Run for cover, I am dragon" >> dragon.txt
+      - name: ASCII artwork
+        run: cowsay -f dragon "Run for cover, I am dragon" >> dragon.txt
