@@ -1,0 +1,14 @@
+name: My 001 workflow
+
+on: push
+
+jobs:
+    first_job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Welcome message
+              run: echo "My 001 GH action job"
+            - name: Second step list files
+              run: ls -al
+            - name: Third step
+              run: cat README.md
