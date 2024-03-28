@@ -15,5 +15,5 @@ jobs:
           ls -al
           cat README.md
 
-      - name: ASCII artwork
-        run: cowsay -f dragon "Run for cover, I am dragon" >> dragon.txt
+    #   - name: ASCII artwork
+    #     run: cowsay -f dragon "Run for cover, I am dragon" >> dragon.txt
