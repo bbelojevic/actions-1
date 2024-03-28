@@ -3,24 +3,48 @@ name: Generate ASCII Artwork
 on: push
 
 jobs:
-  ascii_job:
+  build_job_1:
+    name: Build Job
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Install cowsay program
-        run: |
-          sudo apt-get install cowsay -y
-          cowsay -f dragon "Run for cover, I am a DRAGON... RAWR" >> dragon.txt
+        run: sudo apt-get install cowsay -y
+
+      - name: Execute cowsay cmd
+        run: cowsay -f dragon "Run for cover, I am a DRAGON... RAWR" >> dragon.txt
+
+      - name: Upload dragon.txt
+        uses: actions/upload-artifact@v4
+        with:
+          name: dragon-text-file
+          path: dragon.txt
+          retention-days: 5
+
+  test_job_2:
+    needs: build_job_1
+    name: Test Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download dragon.txt
+        uses: actions/download-artifact@v4
+        with:
+          name: dragon-text-file
 
       - name: Test file exists
-        run: grep -i "dragon" dragon.txt  
+        run: grep -i "dragon" dragon.txt
+
+  deploy_job_3:
+    needs: test_job_2
+    name: Deploy Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download dragon.txt
+        uses: actions/download-artifact@v4
+        with:
+          name: dragon-text-file
 
       - name: Read file
         run: cat dragon.txt
-      
-      - name: List files
-        run: |
-          chmod +x simple-script.sh 
-          ./simple-script.sh
+
+      - name: Deploy
+        run: echo "Deploying..."
