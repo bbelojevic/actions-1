@@ -6,9 +6,14 @@ jobs:
     first_job:
         runs-on: ubuntu-latest
         steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
             - name: Welcome message
               run: echo "My 001 GH action job"
+            
             - name: Second step list files
               run: ls -al
+            
             - name: Third step
               run: cat README.md
