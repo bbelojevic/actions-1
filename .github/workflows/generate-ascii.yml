@@ -21,4 +21,6 @@ jobs:
         run: cat dragon.txt
       
       - name: List files
-        run: ./simple-script.sh
+        run: |
+          chmod +x simple-script.sh 
+          ./simple-script.sh
